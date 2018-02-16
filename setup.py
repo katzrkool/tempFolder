@@ -3,9 +3,11 @@ from pathlib import Path
 import platform
 import subprocess
 import json
+import sys
 
 global currentDir
 currentDir = os.path.dirname(os.path.realpath(__file__))
+
 
 def setup():
     print("Welcome to Temp Folder setup.")
@@ -31,11 +33,11 @@ def writeTo():
 #write out current crontab
 crontab -l > mycron
 #echo new cron into cron file
-echo "0 * * * * python3 {}/delete.py" >> mycron
+echo "0 * * * * {} {}/delete.py" >> mycron
 #install new cron file
 crontab mycron
 rm mycron
-    '''.format(currentDir)
+    '''.format(sys.executable, currentDir)
 
 def chooseName():
     folderName = input("What would you like your temporary folder to be called?\t")
