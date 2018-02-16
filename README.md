@@ -12,7 +12,7 @@ But sometimes, you need your files to last a bit longer than that, so if you pas
 So `-d 1` will delay deletion for an hour.
 
 To delay single files, name the files a time in the future like `4pm.txt` or `2018-03-02` and they won't be deleted until then.
-Most time formats should be picked up, for more detail on what is and isn't accepted, check out the (maya library)[https://github.com/kennethreitz/maya]
+Most time formats should be picked up, for more detail on what is and isn't accepted, check out the [maya library](https://github.com/kennethreitz/maya)
 
 To override all delays, use the -a argument to delete everything.
 
