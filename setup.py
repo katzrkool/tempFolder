@@ -8,7 +8,6 @@ import sys
 global currentDir
 currentDir = os.path.dirname(os.path.realpath(__file__))
 
-
 def setup():
     print("Welcome to Temp Folder setup.")
     nameData = chooseName()
