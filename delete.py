@@ -23,7 +23,7 @@ def check(name):
             return True
         else:
             return False
-    except ValueError:
+    except:
         return False
 
 def delete(all):
