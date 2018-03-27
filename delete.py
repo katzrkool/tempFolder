@@ -38,6 +38,16 @@ def delete(all):
                     os.remove(os.path.join(root, name))
                     if len(os.listdir(root)) == 0 and root is not folder:
                         os.rmdir(root)
+    folderSweep()
+
+def folderSweep():
+    again = True
+    while again:
+        again = False
+        for root, dirs, files in os.walk(folder):
+            if len(os.listdir(root)) == 0 and root is not folder:
+                again = True
+                os.rmdir(root)
 
 def fix():
     global data
