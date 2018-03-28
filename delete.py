@@ -4,6 +4,8 @@ import maya
 from datetime import datetime, timedelta
 import argparse
 global data
+import subprocess
+import sys
 global currentDir
 currentDir = os.path.dirname(os.path.realpath(__file__))
 
@@ -35,9 +37,12 @@ def delete(all):
                 os.rmdir(root)
             for name in files:
                 if check(name) is False or all is True:
-                    os.remove(os.path.join(root, name))
-                    if len(os.listdir(root)) == 0 and root is not folder:
-                        os.rmdir(root)
+                    try:
+                        os.remove(os.path.join(root, name))
+                        if len(os.listdir(root)) == 0 and root is not folder:
+                            os.rmdir(root)
+                    except FileNotFoundError:
+                        pass
     folderSweep()
 
 def folderSweep():
@@ -48,6 +53,16 @@ def folderSweep():
             if len(os.listdir(root)) == 0 and root is not folder:
                 again = True
                 os.rmdir(root)
+
+def uninstall():
+    cronStr = '''0 * * * * {} {}/delete.py'''.format(sys.executable, currentDir)
+    crontab = subprocess.Popen(["crontab", "-l"],
+                             stdout=subprocess.PIPE).stdout.read().decode().strip()
+    crontab = crontab.replace(cronStr,"")
+    with open("mycron","w") as f:
+        f.write(crontab)
+    subprocess.call(["crontab","mycron"])
+    os.remove("mycron")
 
 def fix():
     global data
@@ -68,10 +83,13 @@ if __name__ == '__main__':
     parser.add_argument("-d", type=int, default=0, help="Delays the temporary folder wipe for x hours.")
     parser.add_argument("-a", action="store_true")
     parser.add_argument("-f", action="store_true")
+    parser.add_argument("-r", action="store_true", help="Uninstall tempFolder")
     args = parser.parse_args()
 
     if args.f:
         fix()
+    elif args.r:
+        uninstall()
     elif args.a:
         delete(True)
     elif args.d == 0:

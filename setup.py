@@ -29,13 +29,13 @@ def writeTo():
     global currentDir
     # because i'm too lazy to figure out subprocess
     return '''
-#write out current crontab
-crontab -l > mycron
-#echo new cron into cron file
-echo "0 * * * * {} {}/delete.py" >> mycron
-#install new cron file
-crontab mycron
-rm mycron
+    #write out current crontab
+    crontab -l > mycron
+    #echo new cron into cron file
+    echo "0 * * * * {} {}/delete.py" >> mycron
+    #install new cron file
+    crontab mycron
+    rm mycron
     '''.format(sys.executable, currentDir)
 
 def chooseName():

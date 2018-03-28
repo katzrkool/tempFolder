@@ -19,5 +19,4 @@ To override all delays, use the -a argument to delete everything.
 To remove a delay, use the -f argument
 
 ### Deactivation
-If you don't use crontab, or don't know what it is, you are most likely safe using the `crontab -r` command to remove the cron job, which will stop the deletion permanently.
-If you do use crontab, just remove it from the cron job list.
+Use the -r argument to uninstall the cron setup. This will stop the folder from deleting anymore
