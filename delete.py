@@ -31,7 +31,7 @@ def check(name):
 def delete(all):
     with open(currentDir+"/prefs.json", "r") as f:
         data = json.load(f)
-    if maya.parse(data["time"]).datetime(naive=True) <= datetime.now():
+    if maya.parse(data["time"]).datetime(naive=True) <= datetime.now() or all:
         for root, dirs, files in os.walk(folder):
             if len(os.listdir(root)) == 0 and root is not folder:
                 os.rmdir(root)
