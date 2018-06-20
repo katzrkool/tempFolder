@@ -18,16 +18,6 @@ with open(currentDir+"/prefs.json","r") as f:
 home = os.path.expanduser("~")
 folder = home+"/"+folder
 
-def check(name):
-    try:
-        date = maya.parse(name.split(".")[0]).datetime(naive=True)
-        if date > datetime.now():
-            return True
-        else:
-            return False
-    except:
-        return False
-
 def delete(all):
     with open(currentDir+"/prefs.json", "r") as f:
         data = json.load(f)
@@ -36,13 +26,12 @@ def delete(all):
             if len(os.listdir(root)) == 0 and root is not folder:
                 os.rmdir(root)
             for name in files:
-                if check(name) is False or all is True:
-                    try:
-                        os.remove(os.path.join(root, name))
-                        if len(os.listdir(root)) == 0 and root is not folder:
-                            os.rmdir(root)
-                    except FileNotFoundError:
-                        pass
+                try:
+                    os.remove(os.path.join(root, name))
+                    if len(os.listdir(root)) == 0 and root is not folder:
+                        os.rmdir(root)
+                except FileNotFoundError:
+                    pass
     folderSweep()
 
 def folderSweep():
