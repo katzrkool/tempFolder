@@ -11,12 +11,9 @@ Pretty simple, just place items you intend to use once in the folder, use them, 
 But sometimes, you need your files to last a bit longer than that, so if you pass the -d argument, and a number, it'll hold off on deleting for that many hours. 
 So `-d 1` will delay deletion for an hour.
 
-To delay single files, name the files a time in the future like `4pm.txt` or `2018-03-02` and they won't be deleted until then.
-Most time formats should be picked up, for more detail on what is and isn't accepted, check out the [maya library](https://github.com/kennethreitz/maya)
-
 To override all delays, use the -a argument to delete everything.
 
 To remove a delay, use the -f argument
 
 ### Deactivation
-Use the -r argument to uninstall the cron setup. This will stop the folder from deleting anymore
+Use the -r argument to uninstall the cron setup. This will stop the folder from deleting.
